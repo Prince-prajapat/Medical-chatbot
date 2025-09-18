@@ -7,7 +7,13 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import *
+from deep_translator import GoogleTranslator
 import os
+
+def format_as_bullets(text):
+    sentences = text.split(". ")
+    list_items = "".join([f"<li>{s.strip()}</li>" for s in sentences if s.strip()])
+    return f"<ul>{list_items}</ul>"
 
 
 # ------------------ Flask App ------------------ #
@@ -63,9 +69,33 @@ def index():
 def chat():
     msg = request.form["msg"]
     print("User:", msg)
-    response = rag_chain.invoke({"input": msg})
-    print("Response:", response["answer"])
-    return str(response["answer"])
+
+    # Detect if input contains Hindi characters (Unicode range \u0900–\u097F)
+    if any("\u0900" <= ch <= "\u097F" for ch in msg):
+        # Translate Hindi → English
+        msg_translated = GoogleTranslator(source='hi', target='en').translate(msg)
+        print("Translated to English:", msg_translated)
+
+        # Run RAG pipeline in English
+        response = rag_chain.invoke({"input": msg_translated})
+        ans = response["answer"]
+        print("Answer (EN):", ans)
+
+        # Translate back to Hindi
+        ans_hindi = GoogleTranslator(source='en', target='hi').translate(ans)
+        print("Answer (HI):", ans_hindi)
+
+        # Format as bullet points in Hindi
+        formatted = format_as_bullets(ans_hindi)
+        return formatted
+
+    else:
+        # Normal English flow
+        response = rag_chain.invoke({"input": msg})
+        print("Response:", response["answer"])
+
+        formatted = format_as_bullets(response["answer"])
+        return formatted
 
 
 # ------------------ Run App ------------------ #
