@@ -68,10 +68,23 @@
 						},
 						type: "POST",
 						url: "/get",
-					}).done(function(data) {
-						var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
-						$("#messageFormeight").append($.parseHTML(botHtml));
-					});
+						beforeSend: function() {
+							// Show typing dots while waiting
+							var typingHtml = '<div class="d-flex justify-content-start mb-4 typing-bubble">'+
+											 '<div class="img_cont_msg"><img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg"></div>'+
+											 '<div class="typing"><span></span><span></span><span></span></div></div>';
+						$("#messageFormeight").append(typingHtml);
+					}
+				}).done(function(data) {
+					// Remove typing dots
+					$(".typing-bubble").remove();
+
+					// Show bot reply
+					var botHtml = '<div class="d-flex justify-content-start mb-4">'+
+								  '<div class="img_cont_msg"><img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg"></div>'+
+				 				  '<div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+					$("#messageFormeight").append($.parseHTML(botHtml));
+				});
 					event.preventDefault();
 				});
 			});
