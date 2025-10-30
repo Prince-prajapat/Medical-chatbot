@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 from src.helper import download_hugging_face_embeddings
 from langchain_pinecone import PineconeVectorStore
+from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferWindowMemory
+from langchain.chains import ConversationChain
 from langchain_openai import ChatOpenAI
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -55,10 +58,18 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-# ------------------ Chains ------------------ #
+# ------------------ Chains with Memory ------------------ #
+memory = ConversationBufferWindowMemory(k=5, memory_key="history", return_messages=True)
+
 question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 
+# Combine RAG with memory to keep context
+conversation = ConversationChain(
+    llm=chatModel,
+    memory=memory,
+    verbose=False
+)
 
 # ------------------ Routes ------------------ #
 @app.route("/")
@@ -91,11 +102,18 @@ def chat():
 
     else:
         # Normal English flow
-        response = rag_chain.invoke({"input": msg})
-        print("Response:", response["answer"])
+        rag_response = rag_chain.invoke({"input": msg})
+        contextual_answer = conversation.predict(input=rag_response["answer"])
+        print("Response:", contextual_answer)
 
-        formatted = format_as_bullets(response["answer"])
+        formatted = format_as_bullets(contextual_answer)
         return formatted
+    
+@app.route("/reset", methods=["POST"])
+def reset_memory():
+    memory.clear()
+    return "Conversation memory cleared!"
+
 
 
 # ------------------ Run App ------------------ #
