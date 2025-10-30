@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eco Fruit Cutter Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .bg-eco {
+      background: linear-gradient(135deg, #667eea 0%, #10b981 100%);
+    }
+    #gameArea {
+      width: 350px;
+      height: 500px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .fruit {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s;
+    }
+    .fruit:active {
+      transform: scale(0.8) rotate(-20deg);
+    }
+    .scoreboard {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-weight: bold;
+      color: #10b981;
+      font-size: 1.2rem;
+      z-index: 2;
+    }
+    .game-over {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #333;
+      z-index: 10;
+      border-radius: 1.5rem;
+    }
+    .start-btn {
+      margin-top: 1rem;
+      background: #10b981;
+      color: #fff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .start-btn:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body class="bg-eco min-h-screen flex items-center justify-center">
+  <div>
+    <div class="flex flex-col items-center mb-6">
+      <div class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mb-2">
+        <span class="text-white text-3xl">🍉</span>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800">Eco Fruit Cutter</h1>
+      <p class="text-gray-500 mt-1 mb-4">Click the fruits before they fall!</p>
+    </div>
+    <div id="gameArea">
+      <div class="scoreboard" id="score">Score: 0</div>
+      <div id="gameOver" class="game-over hidden">
+        <div id="finalScore"></div>
+        <button class="start-btn" onclick="startGame()">Restart</button>
+      </div>
+    </div>
+    <div class="text-center mt-4 text-sm text-gray-600">
+      Tip: Try to cut as many fruits as you can!
+    </div>
+  </div>
+  <script>
+    const fruits = ['🍎','🍌','🍉','🍓','🍊','🍍','🥝','🍒','🍇','🥥'];
+    const gameArea = document.getElementById('gameArea');
+    const scoreDisplay = document.getElementById('score');
+    const gameOverDiv = document.getElementById('gameOver');
+    const finalScore = document.getElementById('finalScore');
+    let score = 0, running = false, fruitInterval, speed = 2, missed = 0, maxMissed = 5;
+
+    function randomX() {
+      return Math.floor(Math.random() * (gameArea.clientWidth - 48));
+    }
+
+    function spawnFruit() {
+      if (!running) return;
+      const fruit = document.createElement('div');
+      fruit.className = 'fruit';
+      fruit.textContent = fruits[Math.floor(Math.random() * fruits.length)];
+      fruit.style.left = randomX() + 'px';
+      fruit.style.top = '-48px';
+      gameArea.appendChild(fruit);
+
+      let y = -48;
+      let fallSpeed = speed + Math.random() * 1.5;
+      fruit.fall = setInterval(() => {
+        if (!running) {
+          clearInterval(fruit.fall);
+          fruit.remove();
+          return;
+        }
+        y += fallSpeed;
+        fruit.style.top = y + 'px';
+        if (y > gameArea.clientHeight) {
+          clearInterval(fruit.fall);
+          fruit.remove();
+          missed++;
+          if (missed >= maxMissed) endGame();
+        }
+      }, 16);
+
+      fruit.onclick = function() {
+        if (!running) return;
+        clearInterval(fruit.fall);
+        fruit.style.transform = 'scale(0.2) rotate(360deg)';
+        setTimeout(() => fruit.remove(), 120);
+        score++;
+        scoreDisplay.textContent = 'Score: ' + score;
+        if (score % 10 === 0 && speed < 7) speed += 0.5; // Increase speed every 10 fruits
+      };
+    }
+
+    function startGame() {
+      // Reset
+      score = 0; missed = 0; speed = 2; running = true;
+      scoreDisplay.textContent = 'Score: 0';
+      gameOverDiv.classList.add('hidden');
+      Array.from(document.querySelectorAll('.fruit')).forEach(f => f.remove());
+
+      // Start spawning fruits
+      fruitInterval = setInterval(spawnFruit, 800);
+    }
+
+    function endGame() {
+      running = false;
+      clearInterval(fruitInterval);
+      finalScore.innerHTML = `<div class="mb-2">Game Over!</div><div>Your Score: <b>${score}</b></div>`;
+      gameOverDiv.classList.remove('hidden');
+      Array.from(document.querySelectorAll('.fruit')).forEach(f => f.remove());
+    }
+
+    // Start on load
+    startGame();
+  </script>
+</body>
+</html>

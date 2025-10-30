@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Gamified Environmental Education Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+        
+        .badge-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .leaf-icon {
+            color: #10b981;
+        }
+        
+        .water-icon {
+            color: #3b82f6;
+        }
+        
+        .energy-icon {
+            color: #f59e0b;
+        }
+        
+        .waste-icon {
+            color: #8b5cf6;
+        }
+         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Plant background image for the whole page */
+        .plant-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            background: url('https://images.moneycontrol.com/static-mcnews/2024/09/20240926065824_Sheetal-Kumari-fi-16.jpg?impolicy=website&width=770&height=431') center center/cover no-repeat;
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <body class="bg-gray-50 relative">
+    <!-- Plant background image for the whole page -->
+    <div class="plant-bg"></div>
+    <!-- ...rest of your HTML... -->
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">🌱</span>
+                        </div>
+                        <span class="text-2xl font-bold text-gray-800">EcoLearn</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-green-600 hover:text-green-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#features" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="#courses" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Courses</a>
+                        <a href="#dashboard" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                        <a href="#contact" class="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Learn. Play. Save the Planet.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                    Transform environmental education with our gamified platform designed for schools and colleges. Engage students through interactive challenges, real-world projects, and achievement systems.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="startDemo()" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
+                        Start Free Trial
+                    </button>
+                    <button onclick="scrollToSection('features')" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Why Choose EcoLearn?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our platform combines cutting-edge gamification with proven educational methodologies to create an engaging environmental learning experience.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100 cursor-pointer" onclick="openQuizGame()">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">🎮</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Gamified Learning</h3>
+                    <p class="text-gray-600 mb-4">
+                        Points, badges, leaderboards, and challenges that make environmental education exciting and competitive.
+                    </p>
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                        Try Quiz Game →
+                    </button>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">📊</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Real-time Analytics</h3>
+                    <p class="text-gray-600">
+                        Track student progress, engagement metrics, and learning outcomes with comprehensive dashboards.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">🌍</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Real-world Projects</h3>
+                    <p class="text-gray-600">
+                        Connect classroom learning to actual environmental initiatives and community impact projects.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">👥</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Collaborative Learning</h3>
+                    <p class="text-gray-600">
+                        Team challenges, peer reviews, and group projects that foster collaboration and knowledge sharing.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">📱</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Mobile Friendly</h3>
+                    <p class="text-gray-600">
+                        Access courses and activities anywhere, anytime with our responsive design and mobile app.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-3xl">🏆</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Achievement System</h3>
+                    <p class="text-gray-600">
+                        Comprehensive certification and badge system that recognizes student accomplishments and expertise.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Environmental Learning Modules</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive curriculum covering all aspects of environmental science and sustainability.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-green-500 h-32 flex items-center justify-center">
+                        <span class="text-6xl text-white leaf-icon">🌿</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Biodiversity & Ecosystems</h3>
+                        <p class="text-gray-600 mb-4">Explore the interconnected web of life and learn about conservation strategies.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">12 Lessons</span>
+                            <button onclick="startCourse('biodiversity')" class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition-colors">
+                                Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-blue-500 h-32 flex items-center justify-center">
+                        <span class="text-6xl text-white water-icon">💧</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Water Conservation</h3>
+                        <p class="text-gray-600 mb-4">Master water cycle dynamics and sustainable water management practices.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">10 Lessons</span>
+                            <button onclick="startCourse('water')" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors">
+                                Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-yellow-500 h-32 flex items-center justify-center">
+                        <span class="text-6xl text-white energy-icon">⚡</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Renewable Energy</h3>
+                        <p class="text-gray-600 mb-4">Discover clean energy technologies and their environmental impact.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">15 Lessons</span>
+                            <button onclick="startCourse('energy')" class="bg-yellow-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-yellow-600 transition-colors">
+                                Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-purple-500 h-32 flex items-center justify-center">
+                        <span class="text-6xl text-white waste-icon">♻️</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Waste Management</h3>
+                        <p class="text-gray-600 mb-4">Learn circular economy principles and waste reduction strategies.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">8 Lessons</span>
+                            <button onclick="startCourse('waste')" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600 transition-colors">
+                                Start Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section id="dashboard" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Student Dashboard</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Real-time performance analytics and achievement tracking for students.
+                </p>
+            </div>
+
+            <!-- Top Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <!-- Daily Login Streak -->
+                <div class="bg-gradient-to-r from-orange-400 to-red-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-4xl">🔥</div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">15</div>
+                            <div class="text-sm opacity-90">Day Streak</div>
+                        </div>
+                    </div>
+                    <div class="text-sm opacity-90">Daily Login Streak</div>
+                    <div class="flex justify-center space-x-1 mt-3">
+                        <div class="w-6 h-6 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                            <span class="text-xs">✓</span>
+                        </div>
+                        <div class="w-6 h-6 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                            <span class="text-xs">✓</span>
+                        </div>
+                        <div class="w-6 h-6 bg-white bg-opacity-50 rounded-full flex items-center justify-center badge-animation">
+                            <span class="text-xs">🔥</span>
+                        </div>
+                        <div class="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-xs">?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Points -->
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-4xl">🏆</div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">1,247</div>
+                            <div class="text-sm opacity-90">Points</div>
+                        </div>
+                    </div>
+                    <div class="text-sm opacity-90">Total Points Earned</div>
+                </div>
+
+                <!-- Average Score -->
+                <div class="bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-4xl">📊</div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">92%</div>
+                            <div class="text-sm opacity-90">Average</div>
+                        </div>
+                    </div>
+                    <div class="text-sm opacity-90">Quiz Performance</div>
+                </div>
+
+                <!-- Study Time -->
+                <div class="bg-gradient-to-r from-indigo-400 to-purple-500 rounded-xl p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-4xl">⏱️</div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">24h</div>
+                            <div class="text-sm opacity-90">This Week</div>
+                        </div>
+                    </div>
+                    <div class="text-sm opacity-90">Study Time</div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-8">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Progress Overview -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Course Progress -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Learning Progress</h3>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700 font-medium">Biodiversity & Ecosystems</span>
+                                        <span class="text-green-600 font-semibold">85%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-green-500 h-3 rounded-full progress-bar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700 font-medium">Water Conservation</span>
+                                        <span class="text-blue-600 font-semibold">72%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-blue-500 h-3 rounded-full progress-bar" style="width: 72%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700 font-medium">Renewable Energy</span>
+                                        <span class="text-yellow-600 font-semibold">45%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-yellow-500 h-3 rounded-full progress-bar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-700 font-medium">Waste Management</span>
+                                        <span class="text-purple-600 font-semibold">90%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-purple-500 h-3 rounded-full progress-bar" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Analytics Graph -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Performance Analytics</h3>
+                            
+                            <!-- Weekly Performance Chart -->
+                            <div class="mb-6">
+                                <h4 class="text-lg font-medium text-gray-700 mb-4">Weekly Quiz Scores</h4>
+                                <div class="relative h-48 bg-gray-50 rounded-lg p-4">
+                                    <canvas id="performanceChart" class="w-full h-full"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Study Time Analytics -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <div class="text-2xl font-bold text-blue-600">24h</div>
+                                    <div class="text-sm text-gray-600">Study Time This Week</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="text-2xl font-bold text-green-600">92%</div>
+                                    <div class="text-sm text-gray-600">Average Quiz Score</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Achievements -->
+                    <div class="space-y-6">
+                        <!-- Daily Login Streak -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Daily Login Streak</h3>
+                            <div class="text-center mb-4">
+                                <div class="text-4xl font-bold text-orange-600">🔥 15</div>
+                                <div class="text-gray-600">Days in a row!</div>
+                            </div>
+                            <div class="flex justify-center space-x-2">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center badge-animation">
+                                    <span class="text-white text-xs">🔥</span>
+                                </div>
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                                    <span class="text-gray-500 text-xs">?</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-semibold text-gray-800">Recent Achievements</h3>
+                                <button onclick="openCertificate()" class="text-green-600 hover:text-green-800 text-sm font-medium">
+                                    View Certificate →
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center badge-animation">
+                                        <span class="text-white text-xl">🌱</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Eco Warrior</p>
+                                        <p class="text-sm text-gray-600">Completed 5 courses</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xl">💧</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Water Guardian</p>
+                                        <p class="text-sm text-gray-600">Water conservation expert</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xl">⭐</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Top Performer</p>
+                                        <p class="text-sm text-gray-600">95% average score</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xl">🏆</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Quiz Master</p>
+                                        <p class="text-sm text-gray-600">Scored 100% in 3 quizzes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <div class="text-3xl font-bold text-green-600">1,247</div>
+                                <div class="text-gray-600">Total Points</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Ready to Transform Environmental Education?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Join thousands of educators already using EcoLearn to inspire the next generation of environmental stewards.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Get Started Today</h3>
+                        <form onsubmit="handleContactForm(event)" class="space-y-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Institution Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your School/College Name" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Contact Person</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your Full Name" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="your.email@institution.edu" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Number of Students</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <option>50-100 students</option>
+                                    <option>100-500 students</option>
+                                    <option>500-1000 students</option>
+                                    <option>1000+ students</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Tell us about your environmental education goals..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                                Request Demo & Pricing
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Why Educators Love EcoLearn</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm">✓</span>
+                                </div>
+                                <p class="text-gray-600">Increase student engagement by 300% with gamified learning</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm">✓</span>
+                                </div>
+                                <p class="text-gray-600">Save 10+ hours per week with automated grading and progress tracking</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm">✓</span>
+                                </div>
+                                <p class="text-gray-600">Align with sustainability goals and showcase institutional commitment</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-sm">✓</span>
+                                </div>
+                                <p class="text-gray-600">Access to comprehensive curriculum developed by environmental experts</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-8 text-white">
+                        <h3 class="text-2xl font-semibold mb-4">Special Launch Offer</h3>
+                        <p class="text-lg mb-4">Get 3 months free when you sign up before the end of this month!</p>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-3xl font-bold">$49</span>
+                            <span class="text-lg">/month per 100 students</span>
+                        </div>
+                        <p class="text-sm opacity-90 mt-2">No setup fees • Cancel anytime • 30-day money-back guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <!-- Certificate Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">🏆 Your Certificate</h2>
+                    <button onclick="closeCertificate()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                </div>
+
+                <!-- Name Input Section -->
+                <div class="mb-6" id="nameInputSection">
+                    <label class="block text-gray-700 font-medium mb-2">Enter your name for the certificate:</label>
+                    <div class="flex gap-4">
+                        <input type="text" id="studentName" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your Full Name" maxlength="50">
+                        <button onclick="generateCertificate()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            Generate Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate Display -->
+                <div id="certificateDisplay" class="hidden">
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 border-8 border-green-500 rounded-2xl p-12 text-center relative overflow-hidden">
+                        <!-- Decorative elements -->
+                        <div class="absolute top-4 left-4 text-6xl opacity-20">🌱</div>
+                        <div class="absolute top-4 right-4 text-6xl opacity-20">🌍</div>
+                        <div class="absolute bottom-4 left-4 text-6xl opacity-20">♻️</div>
+                        <div class="absolute bottom-4 right-4 text-6xl opacity-20">💧</div>
+                        
+                        <!-- Certificate Content -->
+                        <div class="relative z-10">
+                            <div class="text-4xl font-bold text-green-600 mb-4">CERTIFICATE OF ACHIEVEMENT</div>
+                            <div class="text-lg text-gray-600 mb-6">This is to certify that</div>
+                            <div class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-green-500 pb-2 inline-block" id="certificateName">Student Name</div>
+                            <div class="text-lg text-gray-600 mb-4">has successfully completed the</div>
+                            <div class="text-2xl font-bold text-blue-600 mb-6">Environmental Education Program</div>
+                            <div class="text-lg text-gray-600 mb-8">and demonstrated exceptional knowledge in environmental science and sustainability</div>
+                            
+                            <!-- Achievement Stats -->
+                            <div class="grid grid-cols-3 gap-6 mb-8">
+                                <div class="bg-white bg-opacity-70 rounded-lg p-4">
+                                    <div class="text-2xl font-bold text-green-600">4/4</div>
+                                    <div class="text-sm text-gray-600">Courses Completed</div>
+                                </div>
+                                <div class="bg-white bg-opacity-70 rounded-lg p-4">
+                                    <div class="text-2xl font-bold text-blue-600">92%</div>
+                                    <div class="text-sm text-gray-600">Average Score</div>
+                                </div>
+                                <div class="bg-white bg-opacity-70 rounded-lg p-4">
+                                    <div class="text-2xl font-bold text-purple-600">1,247</div>
+                                    <div class="text-sm text-gray-600">Points Earned</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Signatures -->
+                            <div class="flex justify-between items-end">
+                                <div class="text-left">
+                                    <div class="border-t-2 border-gray-400 pt-2 w-48">
+                                        <div class="font-semibold text-gray-700">Dr. Sarah Green</div>
+                                        <div class="text-sm text-gray-600">Program Director</div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-6xl mb-2">🏆</div>
+                                    <div class="text-sm text-gray-600" id="certificateDate">Date: December 2024</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="border-t-2 border-gray-400 pt-2 w-48">
+                                        <div class="font-semibold text-gray-700">EcoLearn Platform</div>
+                                        <div class="text-sm text-gray-600">Certification Authority</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Certificate Actions -->
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <button onclick="downloadCertificate()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            📥 Download Certificate
+                        </button>
+                        <button onclick="shareCertificate()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            📤 Share Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <!-- Course Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                        <div id="courseIcon" class="text-4xl mr-4">🌿</div>
+                        <div>
+                            <h2 id="courseTitle" class="text-3xl font-bold text-gray-800">Course Title</h2>
+                            <p class="text-gray-600">Interactive Environmental Learning</p>
+                        </div>
+                    </div>
+                    <button onclick="closeCourseModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                </div>
+
+                <!-- Course Progress -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Course Progress</span>
+                        <span id="courseProgress" class="text-sm font-medium text-green-600">25% Complete</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div id="courseProgressBar" class="bg-green-500 h-3 rounded-full transition-all duration-300" style="width: 25%"></div>
+                    </div>
+                </div>
+
+                <!-- Lessons List -->
+                <div class="space-y-4" id="lessonsList">
+                    <!-- Lessons will be loaded here -->
+                </div>
+
+                <!-- Course Actions -->
+                <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                    <div class="text-sm text-gray-600">
+                        <span id="completedLessons">3</span> of <span id="totalLessons">12</span> lessons completed
+                    </div>
+                    <div class="space-x-4">
+                        <button onclick="closeCourseModal()" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+                            Close
+                        </button>
+                        <button onclick="continueCourse()" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            Continue Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Game Modal -->
+    <div id="quizModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <!-- Quiz Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">🌍 Eco Quiz Challenge</h2>
+                        <p class="text-gray-600">Test your environmental knowledge!</p>
+                    </div>
+                    <button onclick="closeQuizGame()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                </div>
+
+                <!-- Quiz Progress -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span></span>
+                        <span class="text-sm font-medium text-green-600">Score: <span id="currentScore">0</span> points</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-green-500 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Content -->
+                <div id="quizContent">
+                    <!-- Question will be loaded here -->
+                </div>
+
+                <!-- Quiz Results (Hidden initially) -->
+                <div id="quizResults" class="hidden text-center">
+                    <div class="mb-6">
+                        <div class="text-6xl mb-4" id="resultEmoji">🎉</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2" id="resultTitle">Congratulations!</h3>
+                        <p class="text-gray-600 mb-4" id="resultMessage">You completed the quiz!</p>
+                        <div class="text-4xl font-bold text-green-600 mb-2" id="finalScore">0/5</div>
+                        <p class="text-gray-600">Final Score</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600" id="correctAnswers">0</div>
+                            <div class="text-sm text-gray-600">Correct</div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600" id="totalPoints">0</div>
+                            <div class="text-sm text-gray-600">Points Earned</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button onclick="restartQuiz()" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                            🔄 Play Again
+                        </button>
+                        <button onclick="closeQuizGame()" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                            Close Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-lg">🌱</span>
+                        </div>
+                        <span class="text-2xl font-bold">EcoLearn</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering the next generation of environmental stewards through innovative gamified education.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Case Studies</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 EcoLearn. All rights reserved. Made with 💚 for a sustainable future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function startDemo() {
+            alert('🎉 Welcome to EcoLearn! Your free trial is starting now. You\'ll receive an email with login credentials within 5 minutes.');
+        }
+
+        // Course Data with Lessons
+        const courseData = {
+            'biodiversity': {
+                title: 'Biodiversity & Ecosystems',
+                icon: '🌿',
+                color: 'green',
+                lessons: [
+                    { title: 'Introduction to Biodiversity', duration: '15 min', type: 'video', completed: true },
+                    { title: 'Food Chains and Food Webs', duration: '20 min', type: 'interactive', completed: true },
+                    { title: 'Ecosystem Services', duration: '18 min', type: 'reading', completed: true },
+                    { title: 'Threats to Biodiversity', duration: '25 min', type: 'video', completed: false },
+                    { title: 'Conservation Strategies', duration: '22 min', type: 'interactive', completed: false },
+                    { title: 'Protected Areas', duration: '16 min', type: 'reading', completed: false },
+                    { title: 'Species Recovery Programs', duration: '20 min', type: 'video', completed: false },
+                    { title: 'Community Conservation', duration: '18 min', type: 'interactive', completed: false },
+                    { title: 'Biodiversity Monitoring', duration: '24 min', type: 'practical', completed: false },
+                    { title: 'Climate Change Impact', duration: '19 min', type: 'video', completed: false },
+                    { title: 'Sustainable Practices', duration: '21 min', type: 'interactive', completed: false },
+                    { title: 'Final Assessment', duration: '30 min', type: 'quiz', completed: false }
+                ]
+            },
+            'water': {
+                title: 'Water Conservation',
+                icon: '💧',
+                color: 'blue',
+                lessons: [
+                    { title: 'The Water Cycle', duration: '12 min', type: 'video', completed: true },
+                    { title: 'Water Sources and Quality', duration: '18 min', type: 'interactive', completed: true },
+                    { title: 'Water Pollution Types', duration: '20 min', type: 'reading', completed: false },
+                    { title: 'Treatment Technologies', duration: '25 min', type: 'video', completed: false },
+                    { title: 'Conservation Techniques', duration: '22 min', type: 'interactive', completed: false },
+                    { title: 'Rainwater Harvesting', duration: '16 min', type: 'practical', completed: false },
+                    { title: 'Greywater Systems', duration: '19 min', type: 'video', completed: false },
+                    { title: 'Industrial Water Use', duration: '23 min', type: 'reading', completed: false },
+                    { title: 'Water Policy and Law', duration: '17 min', type: 'interactive', completed: false },
+                    { title: 'Final Assessment', duration: '30 min', type: 'quiz', completed: false }
+                ]
+            },
+            'energy': {
+                title: 'Renewable Energy',
+                icon: '⚡',
+                color: 'yellow',
+                lessons: [
+                    { title: 'Energy Fundamentals', duration: '14 min', type: 'video', completed: true },
+                    { title: 'Solar Energy Systems', duration: '22 min', type: 'interactive', completed: false },
+                    { title: 'Wind Power Technology', duration: '20 min', type: 'video', completed: false },
+                    { title: 'Hydroelectric Power', duration: '18 min', type: 'reading', completed: false },
+                    { title: 'Geothermal Energy', duration: '16 min', type: 'interactive', completed: false },
+                    { title: 'Biomass and Biofuels', duration: '19 min', type: 'video', completed: false },
+                    { title: 'Energy Storage Solutions', duration: '24 min', type: 'interactive', completed: false },
+                    { title: 'Grid Integration', duration: '21 min', type: 'reading', completed: false },
+                    { title: 'Energy Efficiency', duration: '17 min', type: 'practical', completed: false },
+                    { title: 'Smart Grid Technology', duration: '23 min', type: 'video', completed: false },
+                    { title: 'Policy and Economics', duration: '20 min', type: 'interactive', completed: false },
+                    { title: 'Future of Energy', duration: '18 min', type: 'reading', completed: false },
+                    { title: 'Project Planning', duration: '25 min', type: 'practical', completed: false },
+                    { title: 'Case Studies', duration: '22 min', type: 'interactive', completed: false },
+                    { title: 'Final Assessment', duration: '35 min', type: 'quiz', completed: false }
+                ]
+            },
+            'waste': {
+                title: 'Waste Management',
+                icon: '♻️',
+                color: 'purple',
+                lessons: [
+                    { title: 'Waste Types and Sources', duration: '15 min', type: 'video', completed: true },
+                    { title: 'The 5 Rs Principle', duration: '18 min', type: 'interactive', completed: true },
+                    { title: 'Recycling Processes', duration: '20 min', type: 'video', completed: false },
+                    { title: 'Composting Methods', duration: '22 min', type: 'practical', completed: false },
+                    { title: 'Hazardous Waste Management', duration: '25 min', type: 'reading', completed: false },
+                    { title: 'Circular Economy', duration: '19 min', type: 'interactive', completed: false },
+                    { title: 'E-waste Solutions', duration: '17 min', type: 'video', completed: false },
+                    { title: 'Final Assessment', duration: '30 min', type: 'quiz', completed: false }
+                ]
+            }
+        };
+
+        function startCourse(courseType) {
+            openCourseModal(courseType);
+        }
+
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            // Simulate form submission
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                alert('✅ Thank you for your interest! Our education specialists will contact you within 24 hours to schedule a personalized demo.');
+                event.target.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }, 2000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Quiz Game Functionality
+        const quizQuestions = [
+            {
+                question: "What percentage of the Earth's water is freshwater?",
+                options: ["97%", "71%", "3%", "25%"],
+                correct: 2,
+                explanation: "Only about 3% of Earth's water is freshwater, and most of that is frozen in ice caps and glaciers!"
+            },
+            {
+                question: "Which renewable energy source produces the most electricity globally?",
+                options: ["Solar", "Wind", "Hydroelectric", "Geothermal"],
+                correct: 2,
+                explanation: "Hydroelectric power is currently the largest source of renewable electricity worldwide."
+            },
+            {
+                question: "How long does it take for a plastic bottle to decompose?",
+                options: ["10 years", "50 years", "450 years", "1000 years"],
+                correct: 2,
+                explanation: "Plastic bottles can take up to 450 years to decompose, which is why recycling is so important!"
+            },
+            {
+                question: "What is the main cause of deforestation worldwide?",
+                options: ["Urban development", "Agriculture", "Mining", "Natural disasters"],
+                correct: 1,
+                explanation: "Agriculture, especially cattle ranching and crop farming, is responsible for about 80% of deforestation."
+            },
+            {
+                question: "Which gas makes up the largest portion of greenhouse gas emissions?",
+                options: ["Methane", "Carbon Dioxide", "Nitrous Oxide", "Fluorinated gases"],
+                correct: 1,
+                explanation: "Carbon dioxide (CO₂) accounts for about 76% of total greenhouse gas emissions globally."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function openQuizGame() {
+            document.getElementById('quizModal').classList.remove('hidden');
+            resetQuiz();
+            loadQuestion();
+        }
+
+        function closeQuizGame() {
+            document.getElementById('quizModal').classList.add('hidden');
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('quizContent').classList.remove('hidden');
+            updateProgress();
+        }
+
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            const quizContent = document.getElementById('quizContent');
+            
+            quizContent.innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">${question.question}</h3>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <button onclick="selectAnswer(${index})" 
+                                    class="answer-option w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                                    data-index="${index}">
+                                <span class="font-medium">${String.fromCharCode(65 + index)}.</span> ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button onclick="previousQuestion()" 
+                            class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors ${currentQuestionIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}"
+                            ${currentQuestionIndex === 0 ? 'disabled' : ''}>
+                        ← Previous
+                    </button>
+                    <button id="nextButton" onclick="nextQuestion()" 
+                            class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors opacity-50 cursor-not-allowed"
+                            disabled>
+                        Next →
+                    </button>
+                </div>
+            `;
+            
+            updateProgress();
+        }
+
+        function selectAnswer(answerIndex) {
+            selectedAnswer = answerIndex;
+            
+            // Remove previous selections
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('border-green-500', 'bg-green-100');
+            });
+            
+            // Highlight selected answer
+            const selectedOption = document.querySelector(`[data-index="${answerIndex}"]`);
+            selectedOption.classList.add('border-green-500', 'bg-green-100');
+            
+            // Enable next button
+            const nextButton = document.getElementById('nextButton');
+            nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            nextButton.disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+            
+            const question = quizQuestions[currentQuestionIndex];
+            
+            // Show correct answer
+            document.querySelectorAll('.answer-option').forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('border-green-600', 'bg-green-200');
+                    option.innerHTML += ' ✓';
+                } else if (index === selectedAnswer && selectedAnswer !== question.correct) {
+                    option.classList.add('border-red-500', 'bg-red-100');
+                    option.innerHTML += ' ✗';
+                }
+                option.disabled = true;
+            });
+            
+            // Show explanation
+            const quizContent = document.getElementById('quizContent');
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'mt-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded';
+            explanationDiv.innerHTML = `
+                <p class="text-blue-800"><strong>Explanation:</strong> ${question.explanation}</p>
+            `;
+            quizContent.insertBefore(explanationDiv, quizContent.lastElementChild);
+            
+            // Update score
+            if (selectedAnswer === question.correct) {
+                score += 10;
+                updateScore();
+            }
+            
+            // Update next button
+            const nextButton = document.getElementById('nextButton');
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                nextButton.textContent = 'Next Question →';
+                nextButton.onclick = () => {
+                    currentQuestionIndex++;
+                    selectedAnswer = null;
+                    loadQuestion();
+                };
+            } else {
+                nextButton.textContent = 'View Results →';
+                nextButton.onclick = showResults;
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                selectedAnswer = null;
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = quizQuestions.length;
+        }
+
+        function updateScore() {
+            document.getElementById('currentScore').textContent = score;
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').classList.add('hidden');
+            document.getElementById('quizResults').classList.remove('hidden');
+            
+            const correctCount = Math.floor(score / 10);
+            const percentage = (correctCount / quizQuestions.length) * 100;
+            
+            // Update result elements
+            document.getElementById('finalScore').textContent = `${correctCount}/${quizQuestions.length}`;
+            document.getElementById('correctAnswers').textContent = correctCount;
+            document.getElementById('totalPoints').textContent = score;
+            
+            // Set result message and emoji based on performance
+            let emoji, title, message;
+            if (percentage >= 80) {
+                emoji = '🏆';
+                title = 'Excellent!';
+                message = 'You\'re an environmental expert!';
+            } else if (percentage >= 60) {
+                emoji = '🌟';
+                title = 'Great Job!';
+                message = 'You have good environmental knowledge!';
+            } else if (percentage >= 40) {
+                emoji = '👍';
+                title = 'Good Effort!';
+                message = 'Keep learning about the environment!';
+            } else {
+                emoji = '📚';
+                title = 'Keep Learning!';
+                message = 'There\'s always room to grow your eco-knowledge!';
+            }
+            
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('resultTitle').textContent = title;
+            document.getElementById('resultMessage').textContent = message;
+        }
+
+        function restartQuiz() {
+            resetQuiz();
+            loadQuestion();
+        }
+
+        // Add scroll effect to progress bars when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.style.width || '0%';
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Certificate Functions
+        function openCertificate() {
+            document.getElementById('certificateModal').classList.remove('hidden');
+            document.getElementById('nameInputSection').classList.remove('hidden');
+            document.getElementById('certificateDisplay').classList.add('hidden');
+        }
+
+        function closeCertificate() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+
+        function generateCertificate() {
+            const studentName = document.getElementById('studentName').value.trim();
+            if (!studentName) {
+                alert('Please enter your name to generate the certificate.');
+                return;
+            }
+
+            document.getElementById('certificateName').textContent = studentName;
+            document.getElementById('nameInputSection').classList.add('hidden');
+            document.getElementById('certificateDisplay').classList.remove('hidden');
+            
+            // Set current date
+            const currentDate = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long' 
+            });
+            document.getElementById('certificateDate').textContent = `Date: ${currentDate}`;
+        }
+
+        function downloadCertificate() {
+            alert('🎉 Certificate download started! Your certificate will be saved as a PDF file.');
+        }
+
+        function shareCertificate() {
+            const studentName = document.getElementById('certificateName').textContent;
+            alert(`🎉 Great job ${studentName}! Your certificate link has been copied to clipboard. Share it on social media to showcase your environmental knowledge!`);
+        }
+
+        // Course Modal Functions
+        let currentCourseType = null;
+
+        function openCourseModal(courseType) {
+            currentCourseType = courseType;
+            const course = courseData[courseType];
+            
+            document.getElementById('courseModal').classList.remove('hidden');
+            document.getElementById('courseIcon').textContent = course.icon;
+            document.getElementById('courseTitle').textContent = course.title;
+            
+            loadCourseLessons(course);
+            updateCourseProgress(course);
+        }
+
+        function closeCourseModal() {
+            document.getElementById('courseModal').classList.add('hidden');
+            currentCourseType = null;
+        }
+
+        function loadCourseLessons(course) {
+            const lessonsList = document.getElementById('lessonsList');
+            const colorClasses = {
+                'green': 'bg-green-100 border-green-300 text-green-800',
+                'blue': 'bg-blue-100 border-blue-300 text-blue-800',
+                'yellow': 'bg-yellow-100 border-yellow-300 text-yellow-800',
+                'purple': 'bg-purple-100 border-purple-300 text-purple-800'
+            };
+            
+            const typeIcons = {
+                'video': '🎥',
+                'interactive': '🎮',
+                'reading': '📖',
+                'practical': '🔬',
+                'quiz': '📝'
+            };
+            
+            lessonsList.innerHTML = course.lessons.map((lesson, index) => `
+                <div class="flex items-center justify-between p-4 border-2 ${lesson.completed ? 'border-green-300 bg-green-50' : 'border-gray-200 bg-white'} rounded-lg hover:shadow-md transition-all duration-200 cursor-pointer" onclick="startLesson(${index})">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 ${lesson.completed ? 'bg-green-500' : 'bg-gray-300'} rounded-full flex items-center justify-center">
+                            ${lesson.completed ? '<span class="text-white text-lg">✓</span>' : `<span class="text-gray-600 text-lg">${index + 1}</span>`}
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">${lesson.title}</h3>
+                            <div class="flex items-center space-x-3 text-sm text-gray-600">
+                                <span class="flex items-center">
+                                    ${typeIcons[lesson.type]} ${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)}
+                                </span>
+                                <span>⏱️ ${lesson.duration}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        ${lesson.completed ? 
+                            '<span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Completed</span>' : 
+                            '<button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">Start</button>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCourseProgress(course) {
+            const completedCount = course.lessons.filter(lesson => lesson.completed).length;
+            const totalCount = course.lessons.length;
+            const progressPercentage = Math.round((completedCount / totalCount) * 100);
+            
+            document.getElementById('courseProgress').textContent = `${progressPercentage}% Complete`;
+            document.getElementById('courseProgressBar').style.width = `${progressPercentage}%`;
+            document.getElementById('completedLessons').textContent = completedCount;
+            document.getElementById('totalLessons').textContent = totalCount;
+        }
+
+        function startLesson(lessonIndex) {
+            const course = courseData[currentCourseType];
+            const lesson = course.lessons[lessonIndex];
+            
+            if (lesson.completed) {
+                alert(`📚 Reviewing: "${lesson.title}"\n\nYou've already completed this lesson. Great job! You can review the content anytime.`);
+            } else {
+                // Simulate lesson completion for demo
+                lesson.completed = true;
+                
+                alert(`🚀 Starting: "${lesson.title}"\n\nType: ${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)}\nDuration: ${lesson.duration}\n\nLesson completed! Great progress! 🎉`);
+                
+                // Reload the course modal with updated progress
+                loadCourseLessons(course);
+                updateCourseProgress(course);
+            }
+        }
+
+        function continueCourse() {
+            const course = courseData[currentCourseType];
+            const nextLesson = course.lessons.find(lesson => !lesson.completed);
+            
+            if (nextLesson) {
+                const lessonIndex = course.lessons.indexOf(nextLesson);
+                startLesson(lessonIndex);
+            } else {
+                alert('🎉 Congratulations! You have completed all lessons in this course. You can now take the final assessment or explore other courses!');
+            }
+        }
+
+        // Performance Chart
+        function drawPerformanceChart() {
+            const canvas = document.getElementById('performanceChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = canvas.offsetHeight;
+            
+            // Sample data for weekly quiz scores
+            const data = [85, 92, 78, 95, 88, 90, 96];
+            const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Chart settings
+            const padding = 40;
+            const chartWidth = width - 2 * padding;
+            const chartHeight = height - 2 * padding;
+            const maxScore = 100;
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            
+            // Horizontal grid lines
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+                
+                // Y-axis labels
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'right';
+                ctx.fillText((maxScore - (maxScore / 5) * i).toString(), padding - 10, y + 4);
+            }
+            
+            // Draw line chart
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            data.forEach((score, index) => {
+                const x = padding + (chartWidth / (data.length - 1)) * index;
+                const y = padding + chartHeight - (score / maxScore) * chartHeight;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                
+                // Draw data points
+                ctx.fillStyle = '#10b981';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // X-axis labels
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[index], x, height - 10);
+            });
+            
+            ctx.stroke();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dashboardSection = document.getElementById('dashboard');
+            if (dashboardSection) {
+                observer.observe(dashboardSection);
+                
+                // Draw performance chart when dashboard is visible
+                setTimeout(() => {
+                    drawPerformanceChart();
+                }, 500);
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980f1376b6f096b4',t:'MTc1ODE3OTk3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

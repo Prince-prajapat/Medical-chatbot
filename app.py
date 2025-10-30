@@ -32,7 +32,7 @@ if not OPENROUTER_API_KEY:
 # ------------------ Pinecone Setup ------------------ #
 embeddings = download_hugging_face_embeddings()
 
-index_name = "bot"
+index_name = "medical-chatbot"
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings

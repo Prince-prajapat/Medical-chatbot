@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .bg-eco {
+      background: linear-gradient(135deg, #667eea 0%, #10b981 100%);
+    }
+    /* Rain animation */
+    .rain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+    .drop {
+      position: absolute;
+      bottom: 100%;
+      width: 2px;
+      height: 18px;
+      background: rgba(59, 130, 246, 0.3);
+      border-radius: 1px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body class="bg-eco min-h-screen flex items-center justify-center">
+  <!-- Background image -->
+  <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80')] bg-cover opacity-20 z-0"></div>
+  <!-- Rain effect -->
+  <div class="rain" id="rain"></div>
+  <div class="relative z-10 w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-8">
+    <div class="flex flex-col items-center mb-6">
+      <div class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mb-2">
+        <span class="text-white text-3xl">🌱</span>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800">EcoLearn</h1>
+      <p class="text-gray-500 mt-1">Create your account</p>
+    </div>
+    <form id="signupForm" class="space-y-5">
+      <div>
+        <label class="block text-gray-700 font-medium mb-2" for="name">Full Name</label>
+        <input id="name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your Name">
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-2" for="email">Email</label>
+        <input id="email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="you@school.edu">
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-2" for="password">Password</label>
+        <input id="password" name="password" type="password" required minlength="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Create a password">
+      </div>
+      <div>
+        <label class="block text-gray-700 font-medium mb-2" for="confirm">Confirm Password</label>
+        <input id="confirm" name="confirm" type="password" required minlength="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Repeat your password">
+      </div>
+      <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+        Sign Up
+      </button>
+      <div class="text-center mt-2 text-sm">
+        Already have an account?
+        <a href="signin.html" class="text-green-600 hover:underline">Sign in</a>
+      </div>
+    </form>
+    <div id="signupMessage" class="mt-4 text-center text-red-500 font-medium hidden"></div>
+  </div>
+  <script>
+    // Rain effect
+    const rain = document.getElementById('rain');
+    const drops = 60;
+    for (let i = 0; i < drops; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.animationDuration = (0.7 + Math.random() * 0.8) + 's';
+      drop.style.animationDelay = (Math.random() * 2) + 's';
+      rain.appendChild(drop);
+    }
+
+    // Signup validation
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+      const message = document.getElementById('signupMessage');
+      message.classList.remove('text-green-600');
+      message.classList.add('text-red-500');
+
+      if (!name) {
+        message.textContent = 'Please enter your name.';
+        message.classList.remove('hidden');
+        return;
+      }
+      if (!email.endsWith('.edu')) {
+        message.textContent = 'Please use your school or college email address.';
+        message.classList.remove('hidden');
+        return;
+      }
+      if (password.length < 6) {
+        message.textContent = 'Password must be at least 6 characters.';
+        message.classList.remove('hidden');
+        return;
+      }
+      if (password !== confirm) {
+        message.textContent = 'Passwords do not match.';
+        message.classList.remove('hidden');
+        return;
+      }
+      message.classList.add('hidden');
+      // Simulate signup
+      message.textContent = '✅ Signup successful! Redirecting...';
+      message.classList.remove('hidden');
+      message.classList.remove('text-red-500');
+      message.classList.add('text-green-600');
+      setTimeout(() => {
+        window.location.href = "dashboard.html"; // Change as needed
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
